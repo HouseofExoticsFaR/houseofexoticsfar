@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory Overview</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .inventory-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .inventory-card {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .inventory-card h3 {
+            margin: 0 0 10px 0;
+            color: #036c5f;
+        }
+
+        .stock-info {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid #eee;
+        }
+
+        .price {
+            color: #2c5282;
+            font-weight: bold;
+        }
+
+        .stock {
+            color: #666;
+        }
+
+        .low-stock {
+            color: #e53e3e;
+        }
+
+        .nav-bar {
+            background-color: #036c5f;
+            padding: 10px 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+
+        .nav-bar a {
+            color: white;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+
+        .nav-bar a:hover {
+            text-decoration: underline;
+        }
+
+        .stock-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .stock-input {
+            width: 60px;
+            padding: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        .update-btn {
+            background-color: #036c5f;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 6px 12px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .update-btn:hover {
+            background-color: #025048;
+        }
+
+        .save-all-btn {
+            background-color: #2c5282;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 20px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+
+        .save-all-btn:hover {
+            background-color: #1a365d;
+        }
+
+        .success-message {
+            color: #2f855a;
+            background-color: #c6f6d5;
+            padding: 10px;
+            border-radius: 4px;
+            margin-top: 10px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-bar">
+            <a href="index.html">Back to Home</a>
+            <a href="#" onclick="logout()" style="float: right;">Logout</a>
+        </div>
+        
+        <h1>Current Inventory</h1>
+        
+        <div class="inventory-grid" id="inventoryGrid">
+            <!-- Inventory items will be loaded here -->
+        </div>
+
+        <button id="saveAllBtn" class="save-all-btn">Save All Changes</button>
+        <div id="successMessage" class="success-message">Changes saved successfully!</div>
+    </div>
+
+    <script>
+        // Check authentication
+        function checkAuth() {
+            const isAuthenticated = localStorage.getItem('adminAuth') === 'true';
+            if (!isAuthenticated) {
+                window.location.href = 'login.html';
+            }
+        }
+
+        // Add logout function
+        function logout() {
+            localStorage.removeItem('adminAuth');
+            window.location.href = 'login.html';
+        }
+
+        // Check authentication when page loads
+        checkAuth();
+
+        // Load inventory data
+        document.addEventListener('DOMContentLoaded', () => {
+            // Get inventory from localStorage or use default
+            let inventory = JSON.parse(localStorage.getItem('inventory')) || {
+                'Parrot Fish': {
+                    stock: 5,
+                    price: 100.00,
+                    id: 'parrot-fish'
+                },
+                'Betta Fish': {
+                    stock: 10,
+                    price: 12.00,
+                    id: 'betta-fish'
+                },
+                'Red Inferno Bearded Dragon': {
+                    stock: 3,
+                    price: 450.00,
+                    id: 'bearded-dragon'
+                },
+                'Super Fire Ball Python': {
+                    stock: 2,
+                    price: 350.00,
+                    id: 'ball-python'
+                }
+            };
+
+            const inventoryGrid = document.getElementById('inventoryGrid');
+            
+            // Create cards for each inventory item
+            Object.entries(inventory).forEach(([name, details]) => {
+                const card = document.createElement('div');
+                card.className = 'inventory-card';
+                
+                const stockClass = details.stock < 3 ? 'low-stock' : 'stock';
+                
+                card.innerHTML = `
+                    <h3>${name}</h3>
+                    <div class="stock-info">
+                        <span class="price">$${details.price.toFixed(2)}</span>
+                        <span class="${stockClass}">Stock: ${details.stock}</span>
+                    </div>
+                    <div class="stock-controls">
+                        <label>Update Stock:</label>
+                        <input type="number" class="stock-input" value="${details.stock}" 
+                               min="0" data-product="${name}">
+                        <button class="update-btn" onclick="updateStock('${name}')">Update</button>
+                    </div>
+                `;
+                
+                inventoryGrid.appendChild(card);
+            });
+
+            // Save All button handler
+            document.getElementById('saveAllBtn').addEventListener('click', () => {
+                const inputs = document.querySelectorAll('.stock-input');
+                inputs.forEach(input => {
+                    const productName = input.dataset.product;
+                    const newStock = parseInt(input.value);
+                    if (!isNaN(newStock) && newStock >= 0) {
+                        inventory[productName].stock = newStock;
+                    }
+                });
+                
+                localStorage.setItem('inventory', JSON.stringify(inventory));
+                
+                // Show success message
+                const successMessage = document.getElementById('successMessage');
+                successMessage.style.display = 'block';
+                setTimeout(() => {
+                    successMessage.style.display = 'none';
+                }, 3000);
+
+                // Update display
+                updateDisplay();
+            });
+        });
+
+        function updateStock(productName) {
+            const input = document.querySelector(`input[data-product="${productName}"]`);
+            const newStock = parseInt(input.value);
+            
+            if (isNaN(newStock) || newStock < 0) {
+                alert('Please enter a valid number');
+                return;
+            }
+
+            let inventory = JSON.parse(localStorage.getItem('inventory'));
+            inventory[productName].stock = newStock;
+            localStorage.setItem('inventory', JSON.stringify(inventory));
+
+            updateDisplay();
+        }
+
+        function updateDisplay() {
+            const inventory = JSON.parse(localStorage.getItem('inventory'));
+            
+            document.querySelectorAll('.inventory-card').forEach(card => {
+                const name = card.querySelector('h3').textContent;
+                const stockSpan = card.querySelector('.stock, .low-stock');
+                const newStock = inventory[name].stock;
+                
+                stockSpan.textContent = `Stock: ${newStock}`;
+                stockSpan.className = newStock < 3 ? 'low-stock' : 'stock';
+            });
+        }
+    </script>
+</body>
+</html>
+

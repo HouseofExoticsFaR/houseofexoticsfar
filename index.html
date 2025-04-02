@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fish & Reptile Shop</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cabin+Condensed:700&display=swap" rel="stylesheet">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+</head>
+
+<body>
+    <header>
+        <div class="header-image">
+            <img src="images/img1.jpg" alt="Header" class="header-img">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="./index.html">Home</a></li>
+                <li><a href="./fish.html">Fish</a></li>
+                <li><a href="./reptiles.html">Reptiles</a></li>
+                <li><a href="#contact">Contact Us!</a></li>
+                <li><a href="./cart.html" id="cart-btn">🛒 Cart</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="section-image-container">
+        <img src="images/img3.jpg" alt="Featured Image" class="section-image">
+    </div>
+
+    <div class="pickup-notice">
+        🚗 Pickup Only - We offer local pickup for all orders in Sebring, FL
+    </div>
+
+    <!-- AI Care Guide Section -->
+    <section id="care-guide">
+        <h2>Pet Care Guide</h2>
+        <p>Click here for care information for your pets!</p>
+        
+        <div class="care-guide-container">
+            <button onclick="openOwnAI()" class="care-btn">Open Chat</button>
+        </div>
+    </section>
+
+    <!-- Contact Section-->
+    <section id="contact">
+        <h2>Contact Us</h2>
+        <p>Have questions? Send us a message!</p>
+
+        <form id="contact-form" class="contact-form">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="from_name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="user_email" required>
+
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+
+            <button type="submit" class="contact-btn">Send Message</button>
+        </form>
+
+        <!-- Add social media icons here -->
+        <div class="contact-social">
+            <p>Follow us on social media!</p>
+            <div class="social-buttons">
+                <a href="https://www.facebook.com/share/1AWg3sWfn3/?mibextid=wwXIfr" target="_blank" class="social-btn facebook-btn">
+                    <i class="fab fa-facebook"></i> Facebook
+                </a>
+                <a href="https://www.instagram.com/houseofexoticsfishandreptiles" target="_blank" class="social-btn instagram-btn">
+                    <i class="fab fa-instagram"></i> Instagram
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2025 House of Exotics. All rights reserved.</p>
+        <a href="admin.html" class="admin-link">admin</a>
+    </footer>
+
+    <script src="inventory.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

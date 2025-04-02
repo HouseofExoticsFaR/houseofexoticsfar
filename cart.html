@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart - House of Exotics</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="cart.css">
+    <!-- Add EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <!-- Initialize EmailJS -->
+    <script type="text/javascript">
+        (function() {
+            emailjs.init("7BJNA8f06oyvp9QlS"); // Your actual public key from the code
+        })();
+    </script>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="cart-container">
+        <h2>Shopping Cart</h2>
+        
+        <!-- Cart Items Section -->
+        <div class="cart-items-section">
+            <div id="cart-items"></div>
+            <div id="total-price-container"></div>
+        </div>
+
+        <!-- Clear spacing -->
+        <div style="clear: both; margin: 30px 0;"></div>
+
+        <!-- Order Form Section -->
+        <div class="order-form-section">
+            <form id="request-form" class="form-section" onsubmit="handleOrderSubmission(event)">
+                <h3>Order Request Form</h3>
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Special Instructions (Optional)</label>
+                    <textarea id="message" rows="4" placeholder="Any special requests or questions?"></textarea>
+                </div>
+                <p class="pickup-notice">Note: All orders are pickup only. We will contact you to arrange pickup time.</p>
+                <button type="submit" class="request-btn">Submit Order Request</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="inventory.js"></script>
+    <script src="cart.js"></script>
+</body>
+</html>

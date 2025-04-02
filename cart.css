@@ -1,0 +1,371 @@
+/* General Styles */
+body {
+    font-family: 'Candara', sans-serif;
+    margin: 0;
+    padding: 30px;
+    background-image: url('Images/img2.jpg'); /* Update with your background image */
+    background-size: cover;
+    background-position: center;
+    color: white;
+}
+
+/* Add these variables at the top of your cart.css */
+:root {
+    --primary-color: #036c5f;
+    --hover-color: #04E4D8;
+    --text-color: white;
+}
+
+/* Add this near the top of your CSS, after the :root section */
+h1, h2, h3, p, label, span {
+    -webkit-text-stroke: 0.5px black; /* Reduced from 0.75px */
+    text-shadow: 
+        -0.5px -0.5px 0 #000,
+        0.5px -0.5px 0 #000,
+        -0.5px 0.5px 0 #000,
+        0.5px 0.5px 0 #000;
+}
+
+/* Extra smooth for smaller text */
+p, label, span {
+    -webkit-text-stroke: 0.25px black; /* Reduced from 0.4px */
+    text-shadow: 
+        -0.25px -0.25px 0 #000,
+        0.25px -0.25px 0 #000,
+        -0.25px 0.25px 0 #000,
+        0.25px 0.25px 0 #000;
+}
+
+/* Remove outline from buttons and inputs */
+button, a, input, textarea {
+    -webkit-text-stroke: 0;
+    text-shadow: none;
+}
+
+/* Ensure form inputs have black text */
+input, textarea {
+    color: black;
+}
+
+/* Navigation Menu Styling */
+nav ul {
+    list-style-type: none;  /* Removes the bullets */
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    padding: 15px 30px; /* Increased from 10px 20px */
+    border-radius: 8px;
+    font-family: Monospace;
+    text-align: center;
+    color: white;
+    background-color: var(--primary-color);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    font-size: 18px; /* Increased from default */
+}
+
+nav ul li a:hover {
+    background-color: var(--hover-color);
+    box-shadow: 0 0 10px var(--hover-color);
+}
+
+/* Media Queries adjustments */
+@media (max-width: 768px) {
+    nav ul li a {
+        padding: 12px 25px; /* Increased from 8px 15px */
+        font-size: 16px; /* Increased from 14px */
+    }
+}
+
+@media (max-width: 480px) {
+    nav ul li a {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+}
+
+/* Cart Section */
+.cart-container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+}
+
+.cart-items-section {
+    margin-bottom: 30px;
+}
+
+.order-form-section {
+    margin-top: 30px;
+}
+
+#cart-items {
+    margin-bottom: 20px;
+}
+
+#total-price-container {
+    margin-bottom: 20px;
+    text-align: right;
+    padding-right: 20px;
+}
+
+h2 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+/* Cart Items */
+.cart-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 40px;
+    border-bottom: 1px solid gold;
+    margin: 0 20px;
+}
+
+.cart-item img {
+    width: 80px;
+    height: auto;
+    border-radius: 5px;
+    margin-right: 20px;
+}
+
+.cart-item-details {
+    flex-grow: 1;
+    margin-left: 60px;
+    padding-left: 40px;
+    min-width: 200px;
+}
+
+.cart-item h3 {
+    margin: 0;
+    font-size: 1.4rem;
+    text-align: left;
+    padding-left: 20px;
+    -webkit-text-stroke: 0.5px black;
+    text-shadow: 
+        1px 1px 1px rgba(0, 0, 0, 0.8);
+    font-weight: bold;
+}
+
+.cart-item p {
+    margin: 5px 0;
+    font-size: 1rem;
+    color: #ddd;
+    text-align: left;
+    padding-left: 20px; /* Added padding to text */
+}
+
+/* Adjust the remove button spacing */
+.remove-btn {
+    margin-left: 20px; /* Reduced from 40px */
+    margin-right: 20px; /* Added right margin for balance */
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    font-size: 16px;
+}
+
+.remove-btn:hover {
+    background-color: var(--hover-color);
+    box-shadow: 0 0 10px var(--hover-color);
+}
+
+/* Checkout Button */
+#checkout-btn {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 15px 30px; /* Increased from 12px 24px */
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 18px; /* Increased from 16px */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+#checkout-btn:hover {
+    background-color: var(--hover-color);
+    box-shadow: 0 0 10px var(--hover-color);
+}
+
+/* Add these styles for quantity controls */
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 10px 0;
+}
+
+.quantity-btn {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    width: 35px; /* Increased from 30px */
+    height: 35px; /* Increased from 30px */
+    cursor: pointer;
+    font-size: 20px; /* Increased from 18px */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.quantity-btn:hover {
+    background-color: var(--hover-color);
+    box-shadow: 0 0 10px var(--hover-color);
+}
+
+.quantity {
+    font-size: 16px;
+    min-width: 30px;
+    text-align: center;
+}
+
+/* Update specific styles for price and subtotal */
+.price-text,
+.subtotal-text {
+    font-size: 1.6rem;  /* Increased from 1.4rem to 1.6rem */
+    font-weight: bold;
+    margin: 12px 0;
+}
+
+/* Keep total price the same */
+#total-price-container h3 {
+    font-size: 1.4rem;
+    -webkit-text-stroke: 0.5px black;
+    text-shadow: 
+        1px 1px 1px rgba(0, 0, 0, 0.8);
+    font-weight: bold;
+}
+
+/* Media query adjustments */
+@media (max-width: 768px) {
+    .price-text,
+    .subtotal-text {
+        font-size: 1.4rem;
+    }
+    
+    #total-price-container h3 {
+        font-size: 1.4rem; /* Keeping total price the same */
+    }
+}
+
+@media (max-width: 480px) {
+    .price-text,
+    .subtotal-text {
+        font-size: 1.2rem;
+    }
+    
+    #total-price-container h3 {
+        font-size: 1.4rem; /* Keeping total price the same */
+    }
+}
+
+/* Media query adjustments */
+@media (max-width: 768px) {
+    .remove-btn, #checkout-btn {
+        font-size: 16px;
+        padding: 12px 25px;
+    }
+    
+    .quantity-btn {
+        width: 32px;
+        height: 32px;
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 480px) {
+    .remove-btn, #checkout-btn {
+        font-size: 14px;
+        padding: 10px 20px;
+    }
+    
+    .quantity-btn {
+        width: 30px;
+        height: 30px;
+        font-size: 16px;
+    }
+}
+
+/* Media query adjustments */
+@media (max-width: 768px) {
+    .cart-item h3 {
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .cart-item h3 {
+        font-size: 1.2rem;
+    }
+}
+
+.form-section {
+    margin: 20px 0;
+    padding: 20px;
+    border: 1px solid #036c5f;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: white;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #036c5f;
+    border-radius: 4px;
+    background: white;
+    color: black;
+}
+
+.request-btn {
+    background: #036c5f;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
+.request-btn:hover {
+    background-color: #04E4D8; /* Teal color on hover */
+    box-shadow: 0 0 10px #04E4D8; /* Adding glow effect */
+}
+
+.request-btn:disabled {
+    background: #cccccc;
+    cursor: not-allowed;
+}
+
